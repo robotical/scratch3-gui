@@ -56,75 +56,57 @@ if(false) {}
 /*!****************************************!*\
   !*** ./src/playground/blocks-only.jsx ***!
   \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _containers_controls_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../containers/controls.jsx */ "./src/containers/controls.jsx");
+/* harmony import */ var _containers_blocks_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/blocks.jsx */ "./src/containers/blocks.jsx");
+/* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/gui.jsx */ "./src/containers/gui.jsx");
+/* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/hash-parser-hoc.jsx */ "./src/lib/hash-parser-hoc.jsx");
+/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/app-state-hoc.jsx */ "./src/lib/app-state-hoc.jsx");
+/* harmony import */ var _blocks_only_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./blocks-only.css */ "./src/playground/blocks-only.css");
+/* harmony import */ var _blocks_only_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_blocks_only_css__WEBPACK_IMPORTED_MODULE_8__);
 
 
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
-var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
-var _controls = __webpack_require__(/*! ../containers/controls.jsx */ "./src/containers/controls.jsx");
 
-var _controls2 = _interopRequireDefault(_controls);
 
-var _blocks = __webpack_require__(/*! ../containers/blocks.jsx */ "./src/containers/blocks.jsx");
-
-var _blocks2 = _interopRequireDefault(_blocks);
-
-var _gui = __webpack_require__(/*! ../containers/gui.jsx */ "./src/containers/gui.jsx");
-
-var _gui2 = _interopRequireDefault(_gui);
-
-var _hashParserHoc = __webpack_require__(/*! ../lib/hash-parser-hoc.jsx */ "./src/lib/hash-parser-hoc.jsx");
-
-var _hashParserHoc2 = _interopRequireDefault(_hashParserHoc);
-
-var _appStateHoc = __webpack_require__(/*! ../lib/app-state-hoc.jsx */ "./src/lib/app-state-hoc.jsx");
-
-var _appStateHoc2 = _interopRequireDefault(_appStateHoc);
-
-var _blocksOnly = __webpack_require__(/*! ./blocks-only.css */ "./src/playground/blocks-only.css");
-
-var _blocksOnly2 = _interopRequireDefault(_blocksOnly);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-    return { vm: state.scratchGui.vm };
+  return {
+    vm: state.scratchGui.vm
+  };
 };
 
-var VMBlocks = (0, _reactRedux.connect)(mapStateToProps)(_blocks2.default);
-var VMControls = (0, _reactRedux.connect)(mapStateToProps)(_controls2.default);
+var VMBlocks = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(_containers_blocks_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]);
+var VMControls = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(_containers_controls_jsx__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
 var BlocksOnly = function BlocksOnly(props) {
-    return _react2.default.createElement(
-        _gui2.default,
-        props,
-        _react2.default.createElement(VMBlocks, {
-            grow: 1,
-            options: {
-                media: 'static/blocks-media/'
-            }
-        }),
-        _react2.default.createElement(VMControls, { className: _blocksOnly2.default.controls })
-    );
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], props, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMBlocks, {
+    grow: 1,
+    options: {
+      media: "static/blocks-media/"
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMControls, {
+    className: _blocks_only_css__WEBPACK_IMPORTED_MODULE_8___default.a.controls
+  }));
 };
 
-var App = (0, _hashParserHoc2.default)((0, _appStateHoc2.default)(BlocksOnly));
-
+var App = Object(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_7__["default"])(Object(_lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__["default"])(BlocksOnly));
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-
-_reactDom2.default.render(_react2.default.createElement(App, null), appTarget);
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), appTarget);
 
 /***/ })
 
