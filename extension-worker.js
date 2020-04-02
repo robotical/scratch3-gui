@@ -1362,6 +1362,11 @@ var BlockType = {
   BOOLEAN: 'Boolean',
 
   /**
+   * A button (not an actual block) for some special action, like making a variable
+   */
+  BUTTON: 'button',
+
+  /**
    * Command block
    */
   COMMAND: 'command',
@@ -1454,7 +1459,7 @@ g = (function() {
 
 try {
 	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
+	g = g || new Function("return this")();
 } catch (e) {
 	// This works if the window reference is available
 	if (typeof window === "object") g = window;
