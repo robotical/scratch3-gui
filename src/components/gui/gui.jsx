@@ -244,10 +244,12 @@ const GUIComponent = props => {
                                         <button
                                             onClick={
                                                 function () {
-                                                    props.vm.loadProject(mv2.savedProjectStates)
-                                                        .then(() => {
-                                                            props.onLoadingFinished(props.loadingState, true);
-                                                        });
+                                                    mv2.savedProjectStates.arrayBuffer().then(buffer => {
+                                                        props.vm.loadProject(buffer)
+                                                            .then(() => {
+                                                                //props.onLoadingFinished(props.loadingState, true);
+                                                            });
+                                                    });
                                                 }
                                             }
                                         >
