@@ -44,6 +44,8 @@ class SB3Downloader extends React.Component {
                 this.props.onSaveFinished();
             }
 
+            alert(mv2.savedProjectStates);
+
             // save project to webview-side object
             // eslint-disable-next-line no-undef
             mv2.savedProjectStates = content;
@@ -56,6 +58,7 @@ class SB3Downloader extends React.Component {
             })();
             // eslint-disable-next-line no-alert
             alert('Project Saved.');
+            alert(JSON.stringify(mv2.savedProjectStates));
 
             // original filesystem save call below
             // downloadBlob(this.props.projectFilename, content);

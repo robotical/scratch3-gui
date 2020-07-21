@@ -240,6 +240,20 @@ const GUIComponent = props => {
                                 onSelect={onActivateTab}
                             >
                                 <TabList className={tabClassNames.tabList}>
+                                    <div>
+                                        <button
+                                            onClick={
+                                                function () {
+                                                    props.vm.loadProject(mv2.savedProjectStates)
+                                                        .then(() => {
+                                                            props.onLoadingFinished(props.loadingState, true);
+                                                        });
+                                                }
+                                            }
+                                        >
+                                            Load
+                                        </button>
+                                    </div>
                                     <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
