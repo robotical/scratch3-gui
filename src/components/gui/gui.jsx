@@ -14,7 +14,6 @@ import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
-import SaveLoadTab from '../../containers/save-load-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
@@ -102,7 +101,6 @@ const GUIComponent = props => {
         onOpenRegistration,
         onToggleLoginOpen,
         onActivateCostumesTab,
-        onActivateSaveLoadTab,
         onActivateSoundsTab,
         onActivateTab,
         onClickLogo,
@@ -116,7 +114,6 @@ const GUIComponent = props => {
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
-        saveLoadTabVisible,
         showComingSoon,
         soundsTabVisible,
         stageSizeForSensors,
@@ -300,10 +297,7 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab>
-                                    <Tab
-                                        className={tabClassNames.tab}
-                                        onClick={onActivateSaveLoadTab}
-                                    >
+                                    <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
                                             src={saveIcon}
@@ -365,9 +359,6 @@ const GUIComponent = props => {
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
-                                </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    {saveLoadTabVisible ? <SaveLoadTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
                             {/* {backpackVisible ? (
@@ -451,7 +442,6 @@ GUIComponent.propTypes = {
     onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
-    saveLoadTabVisible: PropTypes.bool,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
