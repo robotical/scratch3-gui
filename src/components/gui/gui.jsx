@@ -14,6 +14,7 @@ import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
+import SaveLoadTab from '../../containers/save-load-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
@@ -34,7 +35,7 @@ import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
-import {resolveStageSize} from '../../lib/screen-utils';
+import {getStageDimensions, resolveStageSize} from '../../lib/screen-utils';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -43,6 +44,8 @@ import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import saveIcon from './icon--save.svg';
 import Controls from '../../containers/controls.jsx';
+import StageHeader from '../../containers/editor-stagesize-header.jsx';
+import MonitorList from '../../containers/monitor-list.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -99,6 +102,7 @@ const GUIComponent = props => {
         onOpenRegistration,
         onToggleLoginOpen,
         onActivateCostumesTab,
+        onActivateSaveLoadTab,
         onActivateSoundsTab,
         onActivateTab,
         onClickLogo,
@@ -112,18 +116,23 @@ const GUIComponent = props => {
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
+        saveLoadTabVisible,
         showComingSoon,
         soundsTabVisible,
+        stageSizeForSensors,
         stageSizeMode,
         targetIsStage,
         telemetryModalVisible,
         tipsLibraryVisible,
+        useEditorDragStyle,
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
+
+    const stageDimensions = getStageDimensions(stageSizeForSensors, isFullScreen);
 
     const tabClassNames = {
         tabs: styles.tabs,
@@ -307,7 +316,10 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab>
-                                    <Tab className={tabClassNames.tab}>
+                                    <Tab
+                                        className={tabClassNames.tab}
+                                        onClick={onActivateSaveLoadTab}
+                                    >
                                         <img
                                             draggable={false}
                                             src={saveIcon}
@@ -319,7 +331,13 @@ const GUIComponent = props => {
                                         />
                                     </Tab>
                                     <LanguageStandalone canChangeLanguage={canChangeLanguage} />
-                                    <Controls vm={vm} />
+                                    <Box className={styles.controlsWrapper}>
+                                        <Controls vm={vm} />
+                                        <StageHeader
+                                            stageSize={stageSize}
+                                            vm={vm}
+                                        />
+                                    </Box>
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
@@ -348,6 +366,12 @@ const GUIComponent = props => {
                                         </button>
                                     </Box>
                                     {/* below box is perfect for sensor display */}
+                                    <Box className={styles.monitorWrapper}>
+                                        <MonitorList
+                                            draggable={false}
+                                            stageSize={stageDimensions}
+                                        />
+                                    </Box>
                                     <Box className={styles.watermark}>
                                         <Watermark />
                                     </Box>
@@ -358,25 +382,30 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    {saveLoadTabVisible ? <SaveLoadTab vm={vm} /> : null}
+                                </TabPanel>
                             </Tabs>
                             {/* {backpackVisible ? (
                                 <Backpack host={backpackHost} />
                             ) : null}*/}
                         </Box>
-                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
-                            <StageWrapper
-                                isRendererSupported={isRendererSupported}
-                                isRtl={isRtl}
-                                stageSize={stageSize}
-                                vm={vm}
-                            />
-                            <Box className={styles.targetWrapper}>
-                                <TargetPane
+                        { stageSize === STAGE_SIZE_MODES.small ? (
+                            <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
+                                <StageWrapper
+                                    isRendererSupported={isRendererSupported}
+                                    isRtl={isRtl}
                                     stageSize={stageSize}
                                     vm={vm}
                                 />
+                                <Box className={styles.targetWrapper}>
+                                    <TargetPane
+                                        stageSize={stageSize}
+                                        vm={vm}
+                                    />
+                                </Box>
                             </Box>
-                        </Box>
+                        ) : null }
                     </Box>
                 </Box>
                 <DragLayer />
@@ -438,12 +467,14 @@ GUIComponent.propTypes = {
     onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
+    saveLoadTabVisible: PropTypes.bool,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
+    useEditorDragStyle: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

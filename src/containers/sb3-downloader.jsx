@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
-// import downloadBlob from '../lib/download-blob';
 
 import 'regenerator-runtime/runtime.js';
 
@@ -38,27 +37,24 @@ class SB3Downloader extends React.Component {
             'downloadProject'
         ]);
     }
-    downloadProject () {
+    downloadProject (slot) {
+        console.log('Clicked Save');
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
             }
 
-            //alert(mv2.savedProjectStates);
-
-            // save project to webview-side object
-            // eslint-disable-next-line no-undef
-            mv2.savedProjectStates = content;
             // convert to base64 -> convert to string -> send through webview
             (async () => {
                 const b64 = await blobToBase64(content);
-                const blobAsJsonString = JSON.stringify({blob: b64});
+
                 // eslint-disable-next-line no-undef
-                mv2.send_REST(blobAsJsonString);
+                mv2.savedProjectStates[slot.toString()] = b64;
+                mv2.send_REST(`save${JSON.stringify(mv2.savedProjectStates)}`);
             })();
+
             // eslint-disable-next-line no-alert
             alert('Project Saved.');
-            //alert(JSON.stringify(mv2.savedProjectStates));
 
             // original filesystem save call below
             // downloadBlob(this.props.projectFilename, content);
