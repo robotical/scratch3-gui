@@ -782,21 +782,21 @@ const sensing = function (isStage) {
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
 
-            <block type="XAxisMovement" />
+            <block type="mv2_accelerometerX" />
 
-            <block type="YAxisMovement" />
+            <block type="mv2_accelerometerY" />
 
-            <block type="ZAxisMovement" />
+            <block type="mv2_accelerometerZ" />
 
-            <block type="BatteryPercentage" />
+            <block type="mv2_batteryLevel" />
 
-            <block type="ServoCurrent" >
+            <block type="mv2_current" >
                 <value>
                     <field name="SERVOCHOICE"></field>
                 </value>
             </block>>
 
-            <block type="ServoPosition" >
+            <block type="mv2_position" >
                 <value>
                     <field name="SERVOCHOICE"></field>
                 </value>
