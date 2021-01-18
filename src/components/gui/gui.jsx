@@ -15,6 +15,7 @@ import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
 import SaveLoadTab from '../../containers/save-load-tab.jsx';
+import ConnectTab from '../../containers/connect-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
@@ -43,6 +44,7 @@ import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import saveIcon from './icon--save.svg';
+import connectIcon from './icon--connect.svg';
 import Controls from '../../containers/controls.jsx';
 import StageHeader from '../../containers/editor-stagesize-header.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
@@ -107,6 +109,7 @@ const GUIComponent = props => {
         onToggleLoginOpen,
         onActivateCostumesTab,
         onActivateSaveLoadTab,
+        onActivateConnectTab,
         onActivateSoundsTab,
         onActivateTab,
         onClickLogo,
@@ -121,6 +124,7 @@ const GUIComponent = props => {
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
         saveLoadTabVisible,
+        connectTabVisible,
         showComingSoon,
         soundsTabVisible,
         stageSizeForSensors,
@@ -318,6 +322,20 @@ const GUIComponent = props => {
                                             id="gui.gui.toggleSpriteTab"
                                         />
                                     </Tab>
+                                    <Tab
+                                        className={tabClassNames.tab}
+                                        onClick={onActivateConnectTab}
+                                    >
+                                        <img
+                                            draggable={false}
+                                            src={connectIcon}
+                                        />
+                                        <FormattedMessage
+                                            defaultMessage="Connect"
+                                            description="Toggle connect tab"
+                                            id="gui.gui.toggleConnectTab"
+                                        />
+                                    </Tab>
                                     <LanguageStandalone canChangeLanguage={canChangeLanguage} />
                                     <MartyBatteryLevel />
                                     <MartySignalStrength />
@@ -374,6 +392,9 @@ const GUIComponent = props => {
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {saveLoadTabVisible ? <SaveLoadTab vm={vm} /> : null}
+                                </TabPanel>
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    {connectTabVisible ? <ConnectTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
                             {/* {backpackVisible ? (
@@ -458,6 +479,7 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
     saveLoadTabVisible: PropTypes.bool,
+    connectTabVisible: PropTypes.bool,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),

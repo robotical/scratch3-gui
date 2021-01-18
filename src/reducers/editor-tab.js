@@ -5,6 +5,7 @@ const BLOCKS_TAB_INDEX = 0;
 const COSTUMES_TAB_INDEX = 1;
 const SOUNDS_TAB_INDEX = 2;
 const SAVE_LOAD_TAB_INDEX = 3;
+const CONNECT_TAB_INDEX = 4;
 
 const initialState = {
     activeTabIndex: BLOCKS_TAB_INDEX
@@ -36,5 +37,6 @@ export {
     BLOCKS_TAB_INDEX,
     COSTUMES_TAB_INDEX,
     SOUNDS_TAB_INDEX,
-    SAVE_LOAD_TAB_INDEX
+    SAVE_LOAD_TAB_INDEX,
+    CONNECT_TAB_INDEX
 };
