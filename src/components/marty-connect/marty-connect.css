@@ -45,3 +45,16 @@
     color: $error-light;
     text-align: center;
 }
+
+.connect_line {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 10;
+}
+
+.connect_text {
+    flex: 1;
+    margin-left: 10;
+    font-size: 1.2rem;
+}
