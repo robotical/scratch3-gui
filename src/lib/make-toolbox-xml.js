@@ -622,11 +622,15 @@ const sound = function (isStage, targetId, soundName) {
         <!--Marty blocks-->
 
         <block type="mv2_playSound" >
-            <value name="SOUND">
-                    <field name="SOUND"></field>
+            // <value name="SOUND">
+            //         <field name="SOUND"></field>
+            // </value>
+            <value name="SOUND_MENU">
+                <shadow type="sound_sounds_menu">
+                    <field name="SOUND_MENU">${soundName}</field>
+                </shadow>
             </value>
         </block>
-
         ${blockSeparator}
 
         <!--Default blocks-->
