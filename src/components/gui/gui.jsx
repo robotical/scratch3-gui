@@ -331,8 +331,8 @@ const GUIComponent = props => {
                                             src={connectIcon}
                                         />
                                         <FormattedMessage
-                                            defaultMessage="Connect"
-                                            description="Toggle connect tab"
+                                            defaultMessage="Connect / Configure"
+                                            description="Toggle connect/configure tab"
                                             id="gui.gui.toggleConnectTab"
                                         />
                                     </Tab>

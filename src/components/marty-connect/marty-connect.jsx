@@ -15,6 +15,8 @@ import Input from '../forms/input.jsx';
 import styles from './marty-connect.css';
 import collectMetadata from '../../lib/collect-metadata';
 import { requestNewProject } from '../../reducers/project-state';
+import settingIcon from '../../lib/assets/icon--settings.svg'
+
 
 class MartyConnect extends React.Component {
     constructor(props) {
@@ -31,6 +33,7 @@ class MartyConnect extends React.Component {
         this.connStateChanged = this.connStateChanged.bind(this);
         this.connectionFailed = this.connectionFailed.bind(this);
         this.getIpAddresses();
+        this.addonList = {addons:[]};
         mv2.addEventListener('onIsConnectedChange', this.connStateChanged);
         mv2.addEventListener('connectionFailed', this.connectionFailed);
     }
@@ -52,12 +55,27 @@ class MartyConnect extends React.Component {
         // alert(`Failed to connect`);
     }
 
+    async getAddonInfo() {
+        try {
+            this.addonList = JSON.parse(mv2.getHWElemList());
+            console.log('DEBUG: these are the addons');
+            console.log(this.addonList);
+            
+        } catch (error) {
+            console.log('eventConnect - failed to get HWElems ' + error);
+        }
+    }
+
     async doConnect(ipAddress) {
 
         try {
             if (await mv2.connect(ipAddress)) {
                 // Move to the blocks tab now we are connected
                 this.props.onActivateBlocksTab();
+                console.log(mv2);
+                mv2.convertHWElemType();
+                this.getAddonInfo();
+
             }
         } catch (error) {
             // eslint-disable-next-line no-alert
@@ -81,8 +99,21 @@ class MartyConnect extends React.Component {
         this.setState({ ipAddress, isValidIpAddress });
     }
 
+    processAddonInfo(){
+        this.getAddonInfo();
+        const { addons } = this.addonList;
+        addons.map((addon, i) => {
+            addon.addOnType = mv2.convertHWElemType(addon.deviceTypeID);
+        });
+    }
+
+
+
     render() {
+        this.processAddonInfo();
         const { ipAddress, isValidIpAddress, isConnected } = this.state;
+        const { addons } = this.addonList;
+        console.log(this.addonList);
         return (
             <div
                 className={styles.mainContent}
@@ -126,10 +157,58 @@ class MartyConnect extends React.Component {
                         }
                     </div>
                 </div>
+                {!isConnected && 
+                    <div>
+                        <div className={styles.block}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <p>You need Marty and this device to be connected to the same WiFi network</p>
+                                <p>If you are unsure as to how to connect Marty to WiFi our user guide can be found
+                                <a href ="https://userguides.robotical.io/martyv2/userguides/wifi"> here</a></p>
+                                <p>You can find Marty's IP address by connecting to the app, full instructions can be found
+                                <a href="https://userguides.robotical.io/martyv2/userguides/wifi#connection_status"> here.</a></p>
+                            </div>
+                        </div>
+                        <div className={styles.block}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <div>192.168.0.23</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                { isConnected && addons &&
+                    <div>
+                        <ul>
+                            { addons.map((addon, i) => {
+                                console.log("some JS HERE");
+                                return (
+                                    <div className={styles.addons} key={i}>
+                                        <div className="row">
+                                            <div className={styles.addon_column}>
+                                                <div className={styles.info}>{addon.name} - {addon.addOnType}</div>
+                                            </div>
+                                            <div className={styles.icon_column}>
+                                                <img
+                                                    draggable={false}
+                                                    src={settingIcon}
+                                                />                                            </div>
+                                        </div>  
+
+                                    </div>
+                                );
+                            })}
+                        </ul>
+                    </div>
+
+                }
+                
             </div>
         );
     }
 }
+
+
+ 
+
 
 MartyConnect.propTypes = {
     onActivateBlocksTab: PropTypes.func,
@@ -146,6 +225,8 @@ const mapStateToProps = state => ({
     locale: state.locales.locale,
 });
 
+
+
 const mapDispatchToProps = dispatch => ({
     onActivateBlocksTab: () => dispatch(activateTab(BLOCKS_TAB_INDEX)),
 });
@@ -153,3 +234,5 @@ const mapDispatchToProps = dispatch => ({
 export default errorBoundaryHOC('Connect')(
     injectIntl(connect(mapStateToProps, mapDispatchToProps)(MartyConnect))
 );
+
+
