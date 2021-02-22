@@ -16,6 +16,7 @@ import styles from './save-load.css';
 import collectMetadata from '../../lib/collect-metadata';
 import {blobToBase64} from '../../lib/save-load-utils';
 import {requestNewProject} from '../../reducers/project-state';
+const JSZip = require('jszip');
 
 class SaveLoad extends React.Component {
     constructor (props) {
@@ -95,6 +96,76 @@ class SaveLoad extends React.Component {
         }
     }
 
+
+
+
+    // exportScratchFile (targetId, optZipType) {
+    //     const sb3 = require('./serialization/sb3');
+
+    //     const spriteJson = StringUtil.stringify(sb3.serialize(this.runtime, targetId));
+
+    //     const zip = new JSZip();
+    //     zip.file('sprite.json', spriteJson);
+    //     this._addFileDescsToZip(soundDescs.concat(costumeDescs), zip);
+
+    //     return zip.generateAsync({
+    //         type: typeof optZipType === 'string' ? optZipType : 'blob',
+    //         mimeType: 'application/x.scratch.sprite3',
+    //         compression: 'DEFLATE',
+    //         compressionOptions: {
+    //             level: 6
+    //         }
+    //     });
+    // }
+
+    async exportScratchFile (fileName) {
+        const {fileNames} = this.state;
+        const {vm} = this.props;
+        console.log(`Downloading:  ${fileName}`);
+        // const response = await mv2.loadScratchFile(encodeURIComponent(fileName));
+        // const blob = await fetch(response.contents)
+        // const arrayBuffer = await blob.arrayBuffer();
+
+        const savedProject = VM.saveProjectSb3();
+        console.log(savedProject);
+
+        // const zip = new JSZip();
+        // zip.file(fileName, blobJSON);
+        // vm.exportSprite(fileName);
+    }
+
+    async downloadFile (fileName, getConfirmation = true) {
+        const {fileNames} = this.state;
+        if (!getConfirmation || window.confirm(`Do you want to download "${fileName}" to your computer?`)) {
+            console.log(`Downloading:  ${fileName}`);
+            try{
+                //get file from local storage
+                const response = await mv2.downloadScratchFile(fileName);
+                console.log(response)
+                // const blob = new Blob 
+                vm.downloadProjectId(fileName);
+                //get blob
+                // const blob = await fetch(response.contents);
+                // const myblob = blob.blob()
+                var myURL = window.URL || window.webkitURL;
+                // console.log(myblob);
+                // console.log(myURL.createObjectURL);
+                const fileDownloadUrl = myURL.createObjectURL(response);
+                // this.setState ({fileDownloadUrl: fileDownloadUrl},
+                //   () => {
+                //     this.dofileDownload.click();                   // Step 6
+                //     myURL.revokeObjectURL(fileDownloadUrl);          // Step 7
+                //     this.setState({fileDownloadUrl: ""})
+                // })
+                alert('Downloaded Project');
+            } catch (error) {
+            // eslint-disable-next-line no-alert
+            alert(`Failed to download project: ${error.message}`);
+        }
+
+        }
+    }
+
     async deleteFile (fileName, getConfirmation = true) {
         const {fileNames} = this.state;
         // eslint-disable-next-line no-alert
@@ -171,6 +242,11 @@ class SaveLoad extends React.Component {
                                         {key}
                                     </div>
                                     <div style={{display: 'flex', flexDirection: 'row'}}>
+                                        <Button
+                                            className={styles.button}
+                                            style={{marginLeft: 10}}
+                                            onClick={() => this.exportScratchFile(key)}
+                                        >Download</Button>
                                         <Button
                                             className={styles.button}
                                             style={{marginLeft: 10}}
