@@ -13,10 +13,12 @@
     border-radius: 0.5rem;
     border: 1px solid $ui-black-transparent;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 1rem;
     transition: 0.2s;
     user-select: none;
     margin: 0px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 .main-content {
@@ -27,15 +29,7 @@
     flex-grow: 1;
 }
 
-.addons {
-    background-color: $ui-white;
-    border: 1px solid $ui-black-transparent;
-    padding: calc(2 * $space);
-    display: flex;
-    flex-direction: column;   
-    height:80px;
-    width:80%;
-}
+
 
 .block {
     background-color: $ui-white;
@@ -75,7 +69,17 @@
   font-size: 1.2rem;
   font-family: 'Lato-Regular';
   color: black;
+  padding-right: 0.5rem;
+
 }
+
+.connectInfo {
+  font-size: 1.2rem;
+  font-family: 'Lato-Regular';
+  color: black;
+  padding-bottom: 0.5rem;
+}
+
 
 .info {
   font-size: 1.1rem;
@@ -84,12 +88,22 @@
   width: 300px;
 }
 
+.addons {
+    background-color: $ui-white;
+    border: 1px solid $ui-black-transparent;
+    padding: calc(2 * $space);
+    display: flex;
+    flex-direction: column;   
+    height:80px;
+    width:60%;
+}
+
 .addon_column {
     float: left;
     width: 30%;
 }
 
 .icon_column {
-    float: left;
+    float: right;
     width: 10%;
 }

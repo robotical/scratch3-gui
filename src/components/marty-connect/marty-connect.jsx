@@ -103,7 +103,10 @@ class MartyConnect extends React.Component {
         this.getAddonInfo();
         const { addons } = this.addonList;
         addons.map((addon, i) => {
+            console.log("addon.deviceTypeID: " + addon.deviceTypeID)
             addon.addOnType = mv2.convertHWElemType(addon.deviceTypeID);
+            console.log("addon.addOnType: " + addon.addOnType)
+
         });
     }
 
@@ -136,7 +139,7 @@ class MartyConnect extends React.Component {
                         }
                         {!isConnected &&
                             <div className={styles.connect_line}>
-                                <div>Marty's IP Address:</div>
+                                <div className={styles.label}>Marty's IP Address:</div>
                                 <Input
                                     className={styles.connect_text}
                                     type="text"
@@ -146,7 +149,7 @@ class MartyConnect extends React.Component {
                                     }
                                 />
                                 <Button
-                                    style={{ marginLeft: 10, marginRight: 5, opacity: isValidIpAddress ? 1 : 0.2 }}
+                                    style={{opacity: isValidIpAddress ? 1 : 0.2 }}
                                     className={styles.button}
                                     disabled={!isValidIpAddress}
                                     onClick={() => this.doConnect(ipAddress)}
@@ -158,28 +161,20 @@ class MartyConnect extends React.Component {
                     </div>
                 </div>
                 {!isConnected && 
-                    <div>
                         <div className={styles.block}>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <p>You need Marty and this device to be connected to the same WiFi network</p>
-                                <p>If you are unsure as to how to connect Marty to WiFi our user guide can be found
-                                <a href ="https://userguides.robotical.io/martyv2/userguides/wifi"> here</a></p>
-                                <p>You can find Marty's IP address by connecting to the app, full instructions can be found
-                                <a href="https://userguides.robotical.io/martyv2/userguides/wifi#connection_status"> here.</a></p>
+                                <div className={styles.connectInfo}>You need Marty and this device to be connected to the same WiFi network</div>
+                                <div className={styles.connectInfo}>If you are unsure as to how to connect Marty to WiFi our user guide can be found
+                                <a href ="https://userguides.robotical.io/martyv2/userguides/wifi"> here</a></div>
+                                <div className={styles.connectInfo}>You can find Marty's IP address by connecting to the app, full instructions can be found
+                                <a href="https://userguides.robotical.io/martyv2/userguides/wifi#connection_status"> here.</a></div>
                             </div>
                         </div>
-                        <div className={styles.block}>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <div>192.168.0.23</div>
-                            </div>
-                        </div>
-                    </div>
                 }
                 { isConnected && addons &&
                     <div>
                         <ul>
                             { addons.map((addon, i) => {
-                                console.log("some JS HERE");
                                 return (
                                     <div className={styles.addons} key={i}>
                                         <div className="row">
