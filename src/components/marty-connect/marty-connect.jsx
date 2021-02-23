@@ -126,7 +126,7 @@ class MartyConnect extends React.Component {
                         {isConnected &&
                             <div className={styles.connect_line}>
                             <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', marginTop: 10 }}>
-                            <div>Marty is connected, IP Address: {mv2.ipAddress}</div>
+                            <div className={styles.label}>Marty is connected, IP Address: {mv2.ipAddress}</div>
                                 <button
                                     className={styles.button}
                                     style={{ marginLeft:20, marginRight: 5 }}
@@ -163,29 +163,41 @@ class MartyConnect extends React.Component {
                 {!isConnected && 
                         <div className={styles.block}>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <div className={styles.connectInfo}>You need Marty and this device to be connected to the same WiFi network</div>
-                                <div className={styles.connectInfo}>If you are unsure as to how to connect Marty to WiFi our user guide can be found
-                                <a href ="https://userguides.robotical.io/martyv2/userguides/wifi"> here</a></div>
                                 <div className={styles.connectInfo}>You can find Marty's IP address by connecting to the app, full instructions can be found
                                 <a href="https://userguides.robotical.io/martyv2/userguides/wifi#connection_status"> here.</a></div>
+                                <div className={styles.connectInfo}>You need to make sure Marty and this device are connected to the same WiFi network</div>
+                                <div className={styles.connectInfo}>If you are unsure as to how to connect Marty to your WiFi newtork, our user guide can be found
+                                <a href ="https://userguides.robotical.io/martyv2/userguides/wifi"> here</a></div>
+                                
                             </div>
                         </div>
                 }
+                
                 { isConnected && addons &&
-                    <div>
+                    <div className={styles.addon_wrapper}>  
                         <ul>
+                            <div className={styles.addons}>
+                                <div className={styles.addon_titles}>
+                                    <div className={styles.addon_column}>
+                                        <div className={styles.addon_name}>Addon Name
+                                        </div>
+                                        <div className={styles.addon_divider}>
+                                        - </div>
+                                        <div className={styles.addon_type}>Addon Type</div>
+                                    </div>
+                                </div>
+                            </div>
                             { addons.map((addon, i) => {
                                 return (
                                     <div className={styles.addons} key={i}>
-                                        <div className="row">
+                                        <div className={styles.addon_row}>
                                             <div className={styles.addon_column}>
-                                                <div className={styles.info}>{addon.name} - {addon.addOnType}</div>
+                                                <div className={styles.addon_name}>{addon.name}
+                                                </div>
+                                                <div className={styles.addon_divider}>
+                                                - </div>
+                                                <div className={styles.addon_type}>{addon.addOnType}</div>
                                             </div>
-                                            <div className={styles.icon_column}>
-                                                <img
-                                                    draggable={false}
-                                                    src={settingIcon}
-                                                />                                            </div>
                                         </div>  
 
                                     </div>
@@ -231,3 +243,9 @@ export default errorBoundaryHOC('Connect')(
 );
 
 
+//   <div className={styles.icon_column}>
+//     <img
+//         draggable={false}
+//         src={settingIcon}
+//     />
+// </div> 

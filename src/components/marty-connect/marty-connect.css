@@ -17,8 +17,10 @@
     transition: 0.2s;
     user-select: none;
     margin: 0px;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
 }
 
 .main-content {
@@ -61,7 +63,10 @@
 
 .connect_text {
     flex: 1;
-    margin-left: 10;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     font-size: 1.2rem;
 }
 
@@ -81,28 +86,48 @@
 }
 
 
-.info {
-  font-size: 1.1rem;
-  font-family: 'Lato-Regular';
-  color: black;
-  width: 300px;
-}
-
 .addons {
     background-color: $ui-white;
     border: 1px solid $ui-black-transparent;
     padding: calc(2 * $space);
     display: flex;
     flex-direction: column;   
-    height:80px;
-    width:60%;
+    /*height:80px;*/
+    max-width:400px;
+}
+
+.addon_titles {
+    font-weight: bold;
+    /*padding: calc(1.2 * $space);*/
+}
+
+.addon_row {
+    /*padding: calc(1.2 * $space);*/
 }
 
 .addon_column {
-    float: left;
-    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.2rem;
+    font-family: 'Lato-Regular';
 }
 
+.addon_name {
+    flex: 0;
+    /*flex-basis:40%*/
+    min-width:160px;
+}
+
+.addon_divider {
+    flex: 1 5%;
+    max-width: 2rem;
+}
+
+.addon_type {
+    flex: 2;
+    min-width:150px;
+
+}
 .icon_column {
     float: right;
     width: 10%;
