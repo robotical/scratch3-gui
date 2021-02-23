@@ -41,13 +41,6 @@
     flex-direction: column;
 }
 
-.even-row {
-    background-color: $ui-secondary;
-}
-
-.odd-row {
-    background-color: $ui-tertiary;
-}
 
 .error {
     color: $error-light;
@@ -86,35 +79,39 @@
 }
 
 
+.even-row {
+    background-color: $ui-secondary;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    padding: calc(1.2 * $space);
+}
+
+.odd-row {
+    background-color: $ui-tertiary;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    padding: calc(1.2 * $space);
+}
+
+
 .addons {
-    background-color: $ui-white;
-    border: 1px solid $ui-black-transparent;
-    padding: calc(2 * $space);
     display: flex;
     flex-direction: column;   
-    /*height:80px;*/
-    max-width:400px;
-}
-
-.addon_titles {
-    font-weight: bold;
-    /*padding: calc(1.2 * $space);*/
-}
-
-.addon_row {
-    /*padding: calc(1.2 * $space);*/
-}
-
-.addon_column {
-    display: flex;
-    justify-content: flex-start;
-    font-size: 1.2rem;
+    margin-top: 10;
     font-family: 'Lato-Regular';
+    font-size: 1.2rem;
+    
+}
+
+.addon_title {
+    font-weight: bold;
+    padding: calc(1.2 * $space);
 }
 
 .addon_name {
     flex: 0;
-    /*flex-basis:40%*/
     min-width:160px;
 }
 
@@ -127,8 +124,4 @@
     flex: 2;
     min-width:150px;
 
-}
-.icon_column {
-    float: right;
-    width: 10%;
 }

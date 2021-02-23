@@ -58,8 +58,8 @@ class MartyConnect extends React.Component {
     async getAddonInfo() {
         try {
             this.addonList = JSON.parse(mv2.getHWElemList());
-            console.log('DEBUG: these are the addons');
-            console.log(this.addonList);
+            // console.log('DEBUG: these are the addons');
+            // console.log(this.addonList);
             
         } catch (error) {
             console.log('eventConnect - failed to get HWElems ' + error);
@@ -72,7 +72,7 @@ class MartyConnect extends React.Component {
             if (await mv2.connect(ipAddress)) {
                 // Move to the blocks tab now we are connected
                 this.props.onActivateBlocksTab();
-                console.log(mv2);
+                // console.log(mv2);
                 mv2.convertHWElemType();
                 this.getAddonInfo();
 
@@ -103,9 +103,9 @@ class MartyConnect extends React.Component {
         this.getAddonInfo();
         const { addons } = this.addonList;
         addons.map((addon, i) => {
-            console.log("addon.deviceTypeID: " + addon.deviceTypeID)
+            // console.log("addon.deviceTypeID: " + addon.deviceTypeID)
             addon.addOnType = mv2.convertHWElemType(addon.deviceTypeID);
-            console.log("addon.addOnType: " + addon.addOnType)
+            // console.log("addon.addOnType: " + addon.addOnType)
 
         });
     }
@@ -116,7 +116,7 @@ class MartyConnect extends React.Component {
         this.processAddonInfo();
         const { ipAddress, isValidIpAddress, isConnected } = this.state;
         const { addons } = this.addonList;
-        console.log(this.addonList);
+        // console.log(this.addonList);
         return (
             <div
                 className={styles.mainContent}
@@ -172,42 +172,33 @@ class MartyConnect extends React.Component {
                             </div>
                         </div>
                 }
-                
-                { isConnected && addons &&
-                    <div className={styles.addon_wrapper}>  
-                        <ul>
-                            <div className={styles.addons}>
-                                <div className={styles.addon_titles}>
-                                    <div className={styles.addon_column}>
-                                        <div className={styles.addon_name}>Addon Name
-                                        </div>
-                                        <div className={styles.addon_divider}>
-                                        - </div>
-                                        <div className={styles.addon_type}>Addon Type</div>
+                { isConnected && addons.length > 0 &&
+                    <div
+                        className={styles.block}
+                        style={{flex: 1}}
+                    >
+                        
+                        <div className={styles.addons}>
+                            <div className={styles.addon_title}>Your Connected Addons:</div>
+                            {addons.sort().map((key, index) => (
+                                <div
+                                    key={index}
+                                    className={(index % 2) === 0 ? styles.evenRow : styles.oddRow}
+                                >
+                                    <div className={styles.addon_name}>
+                                        {key.name}
+                                    </div>
+                                    <div className={styles.addon_divider}>
+                                        -
+                                    </div>
+                                    <div className={styles.addon_type}>
+                                        {key.addOnType}
                                     </div>
                                 </div>
-                            </div>
-                            { addons.map((addon, i) => {
-                                return (
-                                    <div className={styles.addons} key={i}>
-                                        <div className={styles.addon_row}>
-                                            <div className={styles.addon_column}>
-                                                <div className={styles.addon_name}>{addon.name}
-                                                </div>
-                                                <div className={styles.addon_divider}>
-                                                - </div>
-                                                <div className={styles.addon_type}>{addon.addOnType}</div>
-                                            </div>
-                                        </div>  
-
-                                    </div>
-                                );
-                            })}
-                        </ul>
+                            ))}
+                        </div>
                     </div>
-
                 }
-                
             </div>
         );
     }
