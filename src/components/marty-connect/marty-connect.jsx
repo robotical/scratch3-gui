@@ -58,8 +58,6 @@ class MartyConnect extends React.Component {
     async getAddonInfo() {
         try {
             this.addonList = JSON.parse(mv2.getHWElemList());
-            // console.log('DEBUG: these are the addons');
-            // console.log(this.addonList);
             
         } catch (error) {
             console.log('eventConnect - failed to get HWElems ' + error);
