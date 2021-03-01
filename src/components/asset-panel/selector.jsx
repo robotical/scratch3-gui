@@ -31,6 +31,9 @@ const Selector = props => {
 
     const isRelevantDrag = draggingType === dragType;
 
+    console.log("items");
+    console.log(items[0].dragPayload);
+
     let newButtonSection = null;
 
     if (buttons.length > 0) {

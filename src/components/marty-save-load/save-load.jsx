@@ -42,6 +42,7 @@ class SaveLoad extends React.Component {
     }
     
     async saveFile (fileName) {
+        const {vm} = this.props;
         const {fileNames} = this.state;
         const safeFileName = encodeURIComponent(fileName);
         if (fileNames.includes(safeFileName)) {
@@ -51,7 +52,6 @@ class SaveLoad extends React.Component {
             }
         }
         const sb3Content = await this.props.saveProjectSb3();
-        const base64sb3 = await blobToBase64(sb3Content);
         // eslint-disable-next-line no-undef
         try {
             await mv2.saveScratchFile(safeFileName, base64sb3);
