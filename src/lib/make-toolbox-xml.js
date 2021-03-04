@@ -875,6 +875,14 @@ const sensing = function (isStage) {
 
             <block type="mv2_noisesense" />
 
+            <block type="mv2_addonlist" >
+                <value name="ADDONLIST">
+                    <shadow type="mv2_addonlist_menu">
+                        <field name="ADDONLIST">Addon</field>
+                    </shadow>
+                </value>
+            </block>
+
             <!--<block type="mv2_current" />-->
 
             <!--<block type="mv2_accelerometer" />-->

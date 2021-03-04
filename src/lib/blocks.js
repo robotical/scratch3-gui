@@ -141,6 +141,23 @@ export default function (vm) {
         return [[myself, '_myself_']].concat(spriteMenu());
     };
 
+    const addonMenu = function() {
+        console.log('addonlist menu function');
+        const addonList = [['option1', '1'], ['option 2', '2']];
+        
+        if (mv2.addons){
+            const addons = JSON.parse(mv2.addons).addons;
+            for (var i=0; i < addons.length; i++){
+                //if (addons[i].deviceTypeID == dtid){
+                addonList.push([addons[i].name, addons[i].name]);
+                //}
+            }
+        } else {
+            console.log("No addonlist found in mv2 object");
+        }
+        return addonList;
+    }
+
     const soundColors = ScratchBlocks.Colours.sounds;
 
     const looksColors = ScratchBlocks.Colours.looks;
@@ -152,6 +169,12 @@ export default function (vm) {
     const controlColors = ScratchBlocks.Colours.control;
 
     const eventColors = ScratchBlocks.Colours.event;
+/*
+    ScratchBlocks.Blocks.mv2_addonlist_menu.init = function (){
+        console.log('addonlist init');
+        const json = jsonForMenuBlock('ADDONLIST', addonMenu, sensingColors, []);
+        this.jsonInit(json);
+    }
 
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
         const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
@@ -303,7 +326,7 @@ export default function (vm) {
         const json = jsonForMenuBlock('CLONE_OPTION', cloneMenu, controlColors, []);
         this.jsonInit(json);
     };
-
+*/
     ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId) {
         const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
         return monitoredBlock ? monitoredBlock.isMonitored : false;
