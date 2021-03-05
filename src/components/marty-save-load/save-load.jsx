@@ -52,6 +52,7 @@ class SaveLoad extends React.Component {
             }
         }
         const sb3Content = await this.props.saveProjectSb3();
+        const base64sb3 = await blobToBase64(sb3Content);
         // eslint-disable-next-line no-undef
         try {
             await mv2.saveScratchFile(safeFileName, base64sb3);
