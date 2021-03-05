@@ -230,11 +230,3 @@ const mapDispatchToProps = dispatch => ({
 export default errorBoundaryHOC('Connect')(
     injectIntl(connect(mapStateToProps, mapDispatchToProps)(MartyConnect))
 );
-
-
-//   <div className={styles.icon_column}>
-//     <img
-//         draggable={false}
-//         src={settingIcon}
-//     />
-// </div> 
