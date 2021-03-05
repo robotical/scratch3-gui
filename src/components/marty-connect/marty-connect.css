@@ -100,7 +100,7 @@
     display: flex;
     flex-direction: column;   
     margin-top: 10;
-    font-family: 'Lato-Regular';
+    font-family: 'Lato-Regular', Helvetica, Arial, sans-serif;
     font-size: 1.2rem;
     
 }
@@ -113,6 +113,7 @@
 .addon_name {
     flex: 0;
     min-width:160px;
+
 }
 
 .addon_divider {
