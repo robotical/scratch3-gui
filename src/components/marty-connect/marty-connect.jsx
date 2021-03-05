@@ -161,11 +161,11 @@ class MartyConnect extends React.Component {
                 {!isConnected && 
                         <div className={styles.block}>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <div className={styles.connectInfo}>You can find Marty's IP address by connecting to the app, full instructions can be found &nbsp;
-                                <a href="https://userguides.robotical.io/martyv2/userguides/wifi#connection_status">here.</a></div>
+                                <div className={styles.connectInfo}>You can find Marty's IP address by connecting to the app, full instructions can be found 
+                                <a href="https://userguides.robotical.io/martyv2/userguides/wifi#connection_status" target="_blank">here</a>.</div>
                                 <div className={styles.connectInfo}>You need to make sure Marty and this device are connected to the same WiFi network</div>
-                                <div className={styles.connectInfo}>If you are unsure as to how to connect Marty to your WiFi newtork, our user guide can be found &nbsp;
-                                <a href ="https://userguides.robotical.io/martyv2/userguides/wifi">here</a></div>
+                                <div className={styles.connectInfo}>If you are unsure as to how to connect Marty to your WiFi newtork, our user guide can be found 
+                                <a href ="https://userguides.robotical.io/martyv2/userguides/wifi" target="_blank">here</a>.</div>
                                 
                             </div>
                         </div>

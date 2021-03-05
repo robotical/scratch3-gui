@@ -65,7 +65,7 @@
 
 .label {
   font-size: 1.2rem;
-  font-family: 'Lato-Regular';
+  font-family: 'Lato-Regular', Helvetica, Arial, sans-serif;
   color: black;
   padding-right: 0.5rem;
 
@@ -73,7 +73,7 @@
 
 .connectInfo {
   font-size: 1.2rem;
-  font-family: 'Lato-Regular';
+  font-family: 'Lato-Regular', Helvetica, Arial, sans-serif;
   color: black;
   padding-bottom: 0.5rem;
 }
