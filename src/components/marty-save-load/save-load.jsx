@@ -42,6 +42,7 @@ class SaveLoad extends React.Component {
     }
     
     async saveFile (fileName) {
+        const {vm} = this.props;
         const {fileNames} = this.state;
         const safeFileName = encodeURIComponent(fileName);
         if (fileNames.includes(safeFileName)) {

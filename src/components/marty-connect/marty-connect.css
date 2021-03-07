@@ -3,6 +3,8 @@
 @import "../../css/z-index.css";
 @import "../../css/typography.css";
 
+
+
 .button {
     height: 2rem;
     padding: 0.35rem;
@@ -11,10 +13,14 @@
     border-radius: 0.5rem;
     border: 1px solid $ui-black-transparent;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 1rem;
     transition: 0.2s;
     user-select: none;
     margin: 0px;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
 }
 
 .main-content {
@@ -23,6 +29,12 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    font-family: 'Lato-Regular', Helvetica, Arial, sans-serif;
+    font-size: 1.2rem;
+}
+
+.main-content input {
+    font-size: inherit;
 }
 
 .block {
@@ -33,13 +45,6 @@
     flex-direction: column;
 }
 
-.even-row {
-    background-color: $ui-secondary;
-}
-
-.odd-row {
-    background-color: $ui-tertiary;
-}
 
 .error {
     color: $error-light;
@@ -55,6 +60,60 @@
 
 .connect_text {
     flex: 1;
-    margin-left: 10;
-    font-size: 1.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.label {
+  color: black;
+  padding-right: 0.5rem;
+
+}
+
+.connectInfo {
+  color: black;
+  padding-bottom: 0.5rem;
+}
+
+.even_row, .odd_row {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    padding: calc(1.2 * $space);
+}
+
+.even_row {
+    background-color: $ui-secondary;
+}
+
+.odd_row {
+    background-color: $ui-tertiary;
+}
+
+.addons {
+    display: flex;
+    flex-direction: column;   
+    margin-top: 10;
+}
+
+.addon_title {
+    font-weight: bold;
+    padding: calc(1.2 * $space);
+}
+
+.addon_name {
+    flex: 0;
+    min-width:160px;
+}
+
+.addon_divider {
+    flex: 1 5%;
+    max-width: 2rem;
+}
+
+.addon_type {
+    flex: 2;
+    min-width:150px;
 }
