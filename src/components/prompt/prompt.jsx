@@ -52,6 +52,7 @@ const PromptComponent = props => (
                     onChange={props.onChange}
                     onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
+                    autocapitalize="off"
                 />
             </Box>
             {props.showVariableOptions ?
