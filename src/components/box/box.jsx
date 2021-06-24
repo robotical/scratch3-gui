@@ -51,6 +51,7 @@ const Box = props => {
     return React.createElement(element, {
         className: classNames(className, styles.box),
         ref: componentRef,
+        onLoad: () => document.querySelector('input[value|="block name"') && document.querySelector('input[value|="block name"').setAttribute('autocapitalize', 'none'),
         style: Object.assign(
             {
                 alignContent: alignContent,
