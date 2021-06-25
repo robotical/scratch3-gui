@@ -35,6 +35,7 @@ const messages = defineMessages({
 
 const PromptComponent = props => (
     <Modal
+        id={styles.modalContent}
         className={styles.modalContent}
         contentLabel={props.title}
         onRequestClose={props.onCancel}
@@ -52,6 +53,7 @@ const PromptComponent = props => (
                     onChange={props.onChange}
                     onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
+                    autoCapitalize="none"
                 />
             </Box>
             {props.showVariableOptions ?
