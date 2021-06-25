@@ -161,7 +161,7 @@ class SaveLoad extends React.Component {
                         style={{flex: 1}}
                     >
                         <div>Your Files:</div>
-                        <div style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
+                        <div className={styles.saveList} >
                             {fileNames.sort().map((key, index) => (
                                 <div
                                     key={key}
