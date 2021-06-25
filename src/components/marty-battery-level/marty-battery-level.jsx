@@ -31,10 +31,10 @@ class MartyBatteryLevel extends React.Component {
     }
 
     getFillColor (batteryPercent) {
-        if (batteryPercent >= 70) {
+        if (batteryPercent >= 30) {
             return 'lime';
         }
-        if (batteryPercent >= 30) {
+        if (batteryPercent >= 10) {
             return 'rgb(255,215,0)';
         }
         return 'red';
